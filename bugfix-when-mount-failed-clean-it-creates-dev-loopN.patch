@@ -1,0 +1,39 @@
+diff --git a/libbb/loop.c b/libbb/loop.c
+index c78535a..6387e40 100644
+--- a/libbb/loop.c
++++ b/libbb/loop.c
+@@ -90,9 +90,9 @@ int FAST_FUNC set_loop(char **device, const char *file, unsigned long long offse
+ 	char *try;
+ 	bb_loop_info loopinfo;
+ 	struct stat statbuf;
+-	int i, dfd, ffd, mode, rc;
++	int i, dfd, ffd, mode, rc, mknod_flag;
+ 
+-	rc = dfd = -1;
++	rc = dfd = mknod_flag = -1;
+ 
+ 	/* Open the file.  Barf if this doesn't work.  */
+ 	mode = (flags & BB_LO_FLAGS_READ_ONLY) ? O_RDONLY : O_RDWR;
+@@ -123,8 +123,10 @@ int FAST_FUNC set_loop(char **device, const char *file, unsigned long long offse
+ 			 && try == dev
+ 			) {
+ 				/* Node doesn't exist, try to create it.  */
+-				if (mknod(dev, S_IFBLK|0644, makedev(7, i)) == 0)
++				if (mknod(dev, S_IFBLK|0644, makedev(7, i)) == 0) {
++					mknod_flag = 0;
+ 					goto try_to_open;
++				}
+ 			}
+ 			/* Ran out of block devices, return failure.  */
+ 			rc = -1;
+@@ -140,6 +142,10 @@ int FAST_FUNC set_loop(char **device, const char *file, unsigned long long offse
+ 		if (dfd < 0) {
+ 			if (errno == ENXIO) {
+ 				/* Happens if loop module is not loaded */
++				if (mknod_flag == 0) {
++					mknod_flag = -1;
++					(void)unlink(dev);
++				}
+ 				rc = -1;
+ 				break;
+ 			}
