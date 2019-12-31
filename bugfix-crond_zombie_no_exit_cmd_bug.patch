@@ -1,0 +1,20 @@
+diff --git a/miscutils/crond.c b/miscutils/crond.c
+index f6580a9..5f3963d 100644
+--- a/miscutils/crond.c
++++ b/miscutils/crond.c
+@@ -737,6 +737,7 @@ fork_job(const char *user, int mailFd, CronLine *line, bool run_sendmail)
+  err:
+ 		pid = 0;
+ 	} /* else: PARENT, FORK SUCCESS */
++        waitpid(pid, NULL, 0);
+ 
+ 	/*
+ 	 * Close the mail file descriptor.. we can't just leave it open in
+@@ -867,6 +868,7 @@ static pid_t start_one_job(const char *user, CronLine *line)
+  err:
+ 		pid = 0;
+ 	}
++        waitpid(pid, NULL, 0);
+ 	line->cl_pid = pid;
+ 	return pid;
+ }

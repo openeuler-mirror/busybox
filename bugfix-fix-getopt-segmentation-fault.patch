@@ -1,0 +1,19 @@
+diff --git a/util-linux/getopt.c b/util-linux/getopt.c
+index 1ae0c59..626872d 100644
+--- a/util-linux/getopt.c
++++ b/util-linux/getopt.c
+@@ -385,7 +385,14 @@ int getopt_main(int argc, char **argv)
+ 		option_mask32 |= OPT_u; /* quoting off */
+ 		s = xstrdup(s + strspn(s, "-+"));
+ 		argv[1] = argv[0];
++#if ENABLE_FEATURE_GETOPT_LONG
++		if (long_options != NULL)
++			return generate_output(argv+1, argc-1, s, long_options);
++		else
++			bb_error_msg_and_die("input error,please check");
++#else
+ 		return generate_output(argv+1, argc-1, s, long_options);
++#endif
+ 	}
+ 
+ #if !ENABLE_FEATURE_GETOPT_LONG

@@ -1,0 +1,12 @@
+diff --git a/util-linux/dmesg.c b/util-linux/dmesg.c
+index 81ba1c9..8602d28 100644
+--- a/util-linux/dmesg.c
++++ b/util-linux/dmesg.c
+@@ -64,6 +64,7 @@ int dmesg_main(int argc UNUSED_PARAM, char **argv)
+ 			if (last == '\n' && buf[in] == '<') {
+ 				while (buf[in++] != '>' && in < len)
+ 					;
++				last = buf[in];
+ 			} else {
+ 				last = buf[in++];
+ 				putchar(last);
