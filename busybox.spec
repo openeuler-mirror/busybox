@@ -1,10 +1,10 @@
 #spec file for busybox
 %if "%{!?VERSION:1}"
-%define VERSION 1.28.3
+%define VERSION 1.31.1
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 5
+%define RELEASE 6
 %endif
 
 Name: busybox
@@ -24,20 +24,6 @@ BuildRoot:      %_topdir/BUILDROOT
 BuildRequires: gcc glibc-static git
 BuildRequires: libselinux-devel >= 1.27.7-2
 BuildRequires: libsepol-devel libselinux-static libsepol-static
-
-Patch6000: bugfix-get_header_tar.patch
-Patch6001: bugfix-makefile-libbb-race.patch
-Patch6002: busybox-CVE-2018-20679.patch
-Patch6003: busybox-CVE-2019-5747.patch
-Patch6004: busybox-CVE-2018-1000517.patch
-Patch6005: busybox-CVE-2018-1000500.patch
-
-Patch9000: bugfix-memleak.patch
-Patch9001: bugfix-dmesg_pretty.patch
-Patch9002: bugfix-crontab_remove_bug.patch
-Patch9003: bugfix-crond_zombie_no_exit_cmd_bug.patch
-Patch9004: bugfix-fix-getopt-segmentation-fault.patch
-Patch9005: bugfix-when-mount-failed-clean-it-creates-dev-loopN.patch
 
 Provides: bundled(md5-drepper2)
 
@@ -107,6 +93,12 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Wed Jan 8 2020 openEuler Buildteam <buildteam@openeuler.org> - 1:1.31.1-6
+- Type:enhancement
+- Id:NA
+- SUG:NA
+- DESC:update busybox to 1.31.1
+
 * Wed May 08 2019 gulining<gulining1@huawei.com> - 1:1.28.3-2.h3
 - Type:bugfix
 - ID:NA
