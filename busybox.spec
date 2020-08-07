@@ -19,6 +19,9 @@ Source1: busybox-static.config
 Source2: busybox-petitboot.config
 Source3: busybox-dynamic.config
 
+#backport
+Patch6000: backport-bugfix-remove-stime-calls.patch 
+
 BuildRoot:      %_topdir/BUILDROOT
 #Dependency
 BuildRequires: gcc glibc-static git
