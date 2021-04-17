@@ -4,7 +4,7 @@
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 7
+%define RELEASE 8
 %endif
 
 Name: busybox
@@ -22,6 +22,7 @@ Source3: busybox-dynamic.config
 #backport
 Patch6000: backport-bugfix-remove-stime-calls.patch
 Patch6001: backport-CVE-2018-1000500.patch 
+Patch6002: backport-CVE-2021-28831.patch
 
 BuildRoot:      %_topdir/BUILDROOT
 #Dependency
@@ -97,6 +98,12 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Fri Apr 30 2021 caihaomin <caihaomin@huawei.com> - 1:1.31.1-8
+- Type:CVE
+- CVE:CVE-2021-28831
+- SUG:NA
+- DESC:fix CVE-2021-28831
+
 * Tue Feb 09 2021 xieliuhua <xieliuhua@huawei.com> - 1:1.31.1-7
 - Type:CVE
 - CVE:CVE-2018-1000500
