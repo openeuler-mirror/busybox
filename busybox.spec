@@ -4,7 +4,7 @@
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 6
+%define RELEASE 7
 %endif
 
 Name: busybox
@@ -21,6 +21,8 @@ Source3: busybox-dynamic.config
 
 #backport
 Patch6000: backport-bugfix-remove-stime-calls.patch 
+Patch6001: backport-CVE-2018-1000500.patch
+Patch6002: backport-CVE-2021-28831.patch
 
 BuildRoot:      %_topdir/BUILDROOT
 #Dependency
@@ -96,6 +98,12 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Fri Apr 30 2021 caihaomin <caihaomin@huawei.com> - 1:1.31.1-7
+- Type:CVE
+- Id:NA
+- SUG:NA
+- DESC:fix CVE-2018-1000500 and CVE-2021-28831
+
 * Wed Jan 8 2020 openEuler Buildteam <buildteam@openeuler.org> - 1:1.31.1-6
 - Type:enhancement
 - Id:NA
