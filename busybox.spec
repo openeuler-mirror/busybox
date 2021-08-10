@@ -1,10 +1,10 @@
 #spec file for busybox
 %if "%{!?VERSION:1}"
-%define VERSION 1.31.1
+%define VERSION 1.33.1
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 7
+%define RELEASE 8
 %endif
 
 Name: busybox
@@ -18,9 +18,6 @@ Source: http://www.busybox.net/downloads/%{name}-%{version}.tar.bz2
 Source1: busybox-static.config
 Source2: busybox-petitboot.config
 Source3: busybox-dynamic.config
-
-Patch6000: backport-CVE-2018-1000500.patch
-Patch6001: backport-CVE-2021-28831.patch
 
 BuildRoot:      %_topdir/BUILDROOT
 #Dependency
@@ -96,6 +93,12 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Tue Apr 10 2021 jikui <jikui2@huawei.com> - 1:1.33.1-8
+- Type:enhancement
+- Id:NA
+- SUG:NA
+- DESC:update busybox to 1.33.1
+
 * Sat Apr 17 2021 leizhongkai<leizhongkai@huawei.com> - 1:1.31.1-7
 - Type:CVE
 - Id:NA
