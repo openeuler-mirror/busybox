@@ -1,10 +1,10 @@
 #spec file for busybox
 %if "%{!?VERSION:1}"
-%define VERSION 1.31.1
+%define VERSION 1.33.1
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 8
+%define RELEASE 9
 %endif
 
 Name: busybox
@@ -19,14 +19,9 @@ Source1: busybox-static.config
 Source2: busybox-petitboot.config
 Source3: busybox-dynamic.config
 
-#backport
-Patch6000: backport-bugfix-remove-stime-calls.patch
-Patch6001: backport-CVE-2018-1000500.patch 
-Patch6002: backport-CVE-2021-28831.patch
-
 BuildRoot:      %_topdir/BUILDROOT
 #Dependency
-BuildRequires: gcc glibc-static git
+BuildRequires: gcc glibc-static
 BuildRequires: libselinux-devel >= 1.27.7-2
 BuildRequires: libsepol-devel libselinux-static libsepol-static
 
@@ -55,7 +50,7 @@ This package contains help documentation for busybox
 
 %prep
 # auto apply all needed patch with git
-%autosetup -n %{name}-%{version} -p1 -Sgit -v
+%autosetup -n %{name}-%{version} -p1 -v
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -fPIE" LDFLAGS="-Wl,-z,now"
@@ -98,6 +93,12 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Fri Aug 13 2021 jikui <jikui2@huawei.com> - 1:1.33.1-9
+- Type:enhancement
+- Id:NA
+- SUG:NA
+- DESC:update busybox to 1.33.1
+
 * Fri Apr 30 2021 caihaomin <caihaomin@huawei.com> - 1:1.31.1-8
 - Type:CVE
 - CVE:CVE-2021-28831
