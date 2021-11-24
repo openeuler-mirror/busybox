@@ -4,7 +4,7 @@
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 10
+%define RELEASE 11
 %endif
 
 Name: busybox
@@ -22,6 +22,9 @@ Source3: busybox-dynamic.config
 #backport
 Patch6000: backport-CVE-2021-42374.patch
 Patch6001: backport-CVE-2021-42377.patch
+Patch6002: backport-CVE-2021-42373.patch
+Patch6003: backport-CVE-2021-42375.patch
+Patch6004: backport-CVE-2021-42376.patch
 
 BuildRoot:      %_topdir/BUILDROOT
 #Dependency
@@ -97,6 +100,12 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Wed Nov 24 2021 xiechengliang <xiechengliang1@huawei.com> - 1:1.33.1-11
+- Type:CVE
+- Id:NA
+- SUG:NA
+- DESC:fix CVE-2021-42373 CVE-2021-42375 and CVE-2021-42376
+
 * Mon Nov 22 2021 jikui <jikui2@huawei.com> - 1:1.33.1-10
 - Type:CVE
 - Id:NA
