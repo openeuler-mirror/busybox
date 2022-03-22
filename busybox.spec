@@ -4,7 +4,7 @@
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 10
+%define RELEASE 11
 %endif
 
 Name: busybox
@@ -100,6 +100,12 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Tue Mar 22 2022 herengui <herengui@uniontech.com> - 1:1.31.1-11
+- Type:BUG
+- Id:NA
+- SUG:NA
+- DESC: rebuild for upgrade
+
 * Mon Nov 29 2021 xiechengliang<xiechengliang1@huawei.com> - 1:1.31.1-10
 - Type:CVE
 - Id:NA
