@@ -4,7 +4,7 @@
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 13
+%define RELEASE 14
 %endif
 
 Name: busybox
@@ -18,6 +18,8 @@ Source: http://www.busybox.net/downloads/%{name}-%{version}.tar.bz2
 Source1: busybox-static.config
 Source2: busybox-petitboot.config
 Source3: busybox-dynamic.config
+
+Patch6000: backport-CVE-2022-28391.patch
 
 BuildRoot:      %_topdir/BUILDROOT
 #Dependency
@@ -93,6 +95,12 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Tue Apr 19 2022 jikui <jikui2@huawei.com> - 1:1.34.1-14
+- Type:CVE
+- Id:NA
+- SUG:NA
+- DESC:fix CVE-2022-28391
+
 * Mon Nov 29 2021 jikui <jikui2@huawei.com> - 1:1.34.1-13
 - Type:enhancement
 - Id:NA
