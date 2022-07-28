@@ -1,5 +1,0 @@
-version_control: git
-src_repo: https://git.busybox.net/busybox/
-tag_prefix: "^v"
-separator: _
-git_url: https://git.busybox.net/busybox/
