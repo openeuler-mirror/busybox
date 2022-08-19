@@ -4,7 +4,7 @@
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 16
+%define RELEASE 17
 %endif
 Epoch: 1
 
@@ -21,6 +21,7 @@ Source2: busybox-petitboot.config
 Source3: busybox-dynamic.config
 
 Patch6000: backport-CVE-2022-28391.patch
+Patch6001: backport-CVE-2022-30065.patch
 
 BuildRoot:      %_topdir/BUILDROOT
 #Dependency
@@ -96,6 +97,12 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Fri Aug 19 2022 jikui <jikui2@huawei.com> - 1:1.34.1-17
+- Type:CVE
+- Id:NA
+- SUG:NA
+- DESC:fix CVE-2022-30065
+
 * Thu Jul 28 2022 jikui <jikui2@huawei.com> - 1:1.34.1-16
 - Type:bugfix
 - Id:NA
