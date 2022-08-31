@@ -4,8 +4,9 @@
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 13
+%define RELEASE 14
 %endif
+Epoch: 1
 
 Name: busybox
 Version: %{VERSION}
@@ -102,6 +103,9 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Wed Aug 31 2022 jikui <jikui2@huawei.com> - 1:1.31.1-14
+- add Epoch field in spec file
+
 * Fri Aug 19 2022 jikui <jikui2@huawei.com> - 1:1.31.1-13
 - Type:CVE
 - Id:NA
