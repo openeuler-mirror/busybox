@@ -4,7 +4,7 @@
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 16
+%define RELEASE 17
 %endif
 Epoch: 1
 
@@ -22,6 +22,7 @@ Source3: busybox-dynamic.config
 
 Patch6000: backport-CVE-2022-28391.patch
 Patch6001: backport-CVE-2022-30065.patch
+Patch6002: backport-fix-use-after-free-in-bc-module.patch
 
 BuildRoot:      %_topdir/BUILDROOT
 #Dependency
@@ -97,6 +98,9 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Fri Oct 28 2022 jikui <jikui2@huawei.com> - 1:1.34.1-17
+- fix use after free in bc module
+
 * Fri Aug 19 2022 jikui <jikui2@huawei.com> - 1:1.34.1-16
 - Type:CVE
 - Id:NA
