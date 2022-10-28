@@ -4,7 +4,7 @@
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 14
+%define RELEASE 15
 %endif
 Epoch: 1
 
@@ -28,6 +28,7 @@ Patch6004: backport-CVE-2021-42376.patch
 Patch6005: backport-fix-awk-cve.patch
 Patch6006: backport-CVE-2022-28391.patch
 Patch6007: backport-CVE-2022-30065.patch
+Patch6008: backport-fix-use-after-free-in-bc-module.patch
 
 BuildRoot:      %_topdir/BUILDROOT
 #Dependency
@@ -103,6 +104,9 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Fri Oct 28 2022 jikui <jikui2@huawei.com> - 1:1.31.1-15
+- fix use after free in bc module
+
 * Wed Aug 31 2022 jikui <jikui2@huawei.com> - 1:1.31.1-14
 - add Epoch field in spec file
 
