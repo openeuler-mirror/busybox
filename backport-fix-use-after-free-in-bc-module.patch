@@ -1,0 +1,29 @@
+From 907e1b3a22a8092461176af45468c5b1b9bf6cc0 Mon Sep 17 00:00:00 2001
+From: jackey_1024 <jikui2@huawei.com>
+Date: Fri, 28 Oct 2022 09:45:08 +0800
+Subject: [PATCH] busybox: fix use after free in bc module
+
+backport from upstream:
+https://git.busybox.net/busybox/commit/?id=41d5f800a14769704082f7faeabb8435285499be
+
+Signed-off-by: jackey_1024 <jikui2@huawei.com>
+---
+ miscutils/bc.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/miscutils/bc.c b/miscutils/bc.c
+index f9b08b0..4363585 100644
+--- a/miscutils/bc.c
++++ b/miscutils/bc.c
+@@ -2892,6 +2892,8 @@ static char peek_inbuf(void)
+ 	) {
+ 		xc_read_line(&G.input_buffer, G.prs.lex_input_fp);
+ 		G.prs.lex_inbuf = G.input_buffer.v;
++		// lex_next_at may point to now-freed data, update it:
++		G.prs.lex_next_at = G.prs.lex_inbuf;
+ 		if (G.input_buffer.len <= 1) // on EOF, len is 1 (NUL byte)
+ 			G.prs.lex_input_fp = NULL;
+ 	}
+-- 
+2.25.1
+
