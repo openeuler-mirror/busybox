@@ -4,7 +4,7 @@
 %endif
 
 %if "%{!?RELEASE:1}"
-%define RELEASE 19
+%define RELEASE 20
 %endif
 Epoch: 1
 
@@ -64,7 +64,7 @@ export CFLAGS="$RPM_OPT_FLAGS -fPIE" LDFLAGS="-Wl,-z,now"
 cp %{SOURCE3} .config
 yes "" | make oldconfig && \
 cat .config && \
-make V=1 %{?_smp_mflags} CC="gcc $RPM_OPT_FLAGS"
+make V=1 %{?_smp_mflags} CC="$CC $RPM_OPT_FLAGS"
 
 cp busybox_unstripped busybox.dynamic
 cp docs/busybox.1 docs/busybox.dynamic.1
@@ -73,7 +73,7 @@ make clean
 cp %{SOURCE2} .config
 yes "" | make oldconfig
 cat .config && \
-make V=1 %{?_smp_mflags} CC="%__cc $RPM_OPT_FLAGS"
+make V=1 %{?_smp_mflags} CC="$CC $RPM_OPT_FLAGS"
 
 cp busybox_unstripped busybox.petitboot
 cp docs/busybox.1 docs/busybox.petitboot.1
@@ -99,6 +99,9 @@ install -m 644 docs/busybox.dynamic.1 $RPM_BUILD_ROOT/%{_mandir}/man1/busybox.1
 %{_mandir}/man1/busybox.petitboot.1.gz
 
 %changelog
+* Fri Apr 14 2023 jammyjellyfish <jammyjellyfish255@outlook.com> - 1:1.34.1-20
+- Support specify CC
+
 * Fri Dec 16 2022 cf_zhao <zhaochuanfeng@huawei.com> - 1:1.34.1-19
 - Backport generalize "const trick" which commited in 1f925038ab9c6bd8f6b3cd40ed7aab0ef10d898e
 
